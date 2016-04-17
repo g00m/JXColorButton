@@ -31,7 +31,7 @@ import Cocoa
     
     /// The controller that handles this controls' actions (such as click event).
     /// You can hook this up in interface builder if you like.
-    @IBOutlet weak var delegate: NSWindowController?
+    @IBOutlet weak var delegate: JXColorButtonDelegate?
     
     /// The border radius of the button.
     @IBInspectable var borderRadius: CGFloat = 4.0 { didSet(value) { layer?.cornerRadius = value } }
@@ -65,6 +65,10 @@ import Cocoa
             layer?.backgroundColor = value.CGColor
             if !colorReferenced(value) {
                 customColor = colorPanel.color
+            }
+            // Call the delegate
+            if let receiver = delegate {
+                receiver.colorSelected(self, color: value)
             }
         }
     }
@@ -146,7 +150,7 @@ import Cocoa
     func showColorPanel() {
         colorPanel.showsAlpha = usesAlphaChannel
         colorPanel.setTarget(self)
-        colorPanel.setAction(#selector(self.changeColor(_:)))
+        colorPanel.setAction(#selector(self.colorFromPanel(_:)))
         colorPanel.continuous = true
         NSApplication.sharedApplication().orderFrontColorPanel(self)
     }
@@ -166,13 +170,13 @@ import Cocoa
     
     func colorWasSelected(sender: JXColorGridView, color: NSColor?, selectionType: JXColorGridViewSelectionType) {
         popover.close()
+        lastSelectionType = selectionType
         if color != nil {
             self.color = color!
             colorPanel.color = color!
         } else {
             showColorPanel()
         }
-        lastSelectionType = selectionType
     }
     
     // MARK: Private Methods
@@ -244,17 +248,9 @@ import Cocoa
         return false
     }
     
-    // MARK: Event Management
-    
-    override func mouseUp(theEvent: NSEvent) {
-        super.mouseUp(theEvent)
-        showColorPopover()
-        JXColorButton.lastColorButton = self
-    }
-    
     // MARK: Color Panel
     
-    override func changeColor(sender: AnyObject?) {
+    @objc private func colorFromPanel(sender: AnyObject?) {
         // Look at the last JXColorButton to have focus and alter it accordingly.
         if let lastColorButton = JXColorButton.lastColorButton {
             lastColorButton.color = colorPanel.color
@@ -263,5 +259,13 @@ import Cocoa
                 lastColorButton.customColor = colorPanel.color
             }
         }
+    }
+    
+    // MARK: Event Management
+    
+    override func mouseUp(theEvent: NSEvent) {
+        super.mouseUp(theEvent)
+        showColorPopover()
+        JXColorButton.lastColorButton = self
     }
 }

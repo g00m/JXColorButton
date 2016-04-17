@@ -1,0 +1,310 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CAFD074B1CC4214E005A2EDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD074A1CC4214E005A2EDB /* AppDelegate.swift */; };
+		CAFD074D1CC4214E005A2EDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAFD074C1CC4214E005A2EDB /* Assets.xcassets */; };
+		CAFD07501CC4214E005A2EDB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAFD074E1CC4214E005A2EDB /* MainMenu.xib */; };
+		CAFD075C1CC4218B005A2EDB /* JXColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD07571CC4218B005A2EDB /* JXColorButton.swift */; };
+		CAFD075D1CC4218B005A2EDB /* JXColorGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD07581CC4218B005A2EDB /* JXColorGridView.swift */; };
+		CAFD075E1CC4218B005A2EDB /* JXColorGridViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD07591CC4218B005A2EDB /* JXColorGridViewDelegate.swift */; };
+		CAFD075F1CC4218B005A2EDB /* NSColor Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD075A1CC4218B005A2EDB /* NSColor Extension.swift */; };
+		CAFD07601CC4218B005A2EDB /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD075B1CC4218B005A2EDB /* WindowController.swift */; };
+		CAFD07631CC421BB005A2EDB /* Window.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAFD07621CC421BB005A2EDB /* Window.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CAFD07471CC4214E005A2EDB /* JXColorButton Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JXColorButton Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAFD074A1CC4214E005A2EDB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CAFD074C1CC4214E005A2EDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CAFD074F1CC4214E005A2EDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		CAFD07511CC4214E005A2EDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CAFD07571CC4218B005A2EDB /* JXColorButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXColorButton.swift; sourceTree = "<group>"; };
+		CAFD07581CC4218B005A2EDB /* JXColorGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXColorGridView.swift; sourceTree = "<group>"; };
+		CAFD07591CC4218B005A2EDB /* JXColorGridViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXColorGridViewDelegate.swift; sourceTree = "<group>"; };
+		CAFD075A1CC4218B005A2EDB /* NSColor Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor Extension.swift"; sourceTree = "<group>"; };
+		CAFD075B1CC4218B005A2EDB /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		CAFD07621CC421BB005A2EDB /* Window.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Window.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CAFD07441CC4214E005A2EDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CAFD073E1CC4214E005A2EDB = {
+			isa = PBXGroup;
+			children = (
+				CAFD07491CC4214E005A2EDB /* JXColorButton Test */,
+				CAFD07481CC4214E005A2EDB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CAFD07481CC4214E005A2EDB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CAFD07471CC4214E005A2EDB /* JXColorButton Test.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CAFD07491CC4214E005A2EDB /* JXColorButton Test */ = {
+			isa = PBXGroup;
+			children = (
+				CAFD07511CC4214E005A2EDB /* Info.plist */,
+				CAFD074A1CC4214E005A2EDB /* AppDelegate.swift */,
+				CAFD07611CC42195005A2EDB /* JXColorButton */,
+				CAFD075B1CC4218B005A2EDB /* WindowController.swift */,
+				CAFD074C1CC4214E005A2EDB /* Assets.xcassets */,
+				CAFD074E1CC4214E005A2EDB /* MainMenu.xib */,
+				CAFD07621CC421BB005A2EDB /* Window.xib */,
+			);
+			path = "JXColorButton Test";
+			sourceTree = "<group>";
+		};
+		CAFD07611CC42195005A2EDB /* JXColorButton */ = {
+			isa = PBXGroup;
+			children = (
+				CAFD07571CC4218B005A2EDB /* JXColorButton.swift */,
+				CAFD07581CC4218B005A2EDB /* JXColorGridView.swift */,
+				CAFD07591CC4218B005A2EDB /* JXColorGridViewDelegate.swift */,
+				CAFD075A1CC4218B005A2EDB /* NSColor Extension.swift */,
+			);
+			name = JXColorButton;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CAFD07461CC4214E005A2EDB /* JXColorButton Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAFD07541CC4214E005A2EDB /* Build configuration list for PBXNativeTarget "JXColorButton Test" */;
+			buildPhases = (
+				CAFD07431CC4214E005A2EDB /* Sources */,
+				CAFD07441CC4214E005A2EDB /* Frameworks */,
+				CAFD07451CC4214E005A2EDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "JXColorButton Test";
+			productName = "JXColorButton Test";
+			productReference = CAFD07471CC4214E005A2EDB /* JXColorButton Test.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CAFD073F1CC4214E005A2EDB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Joseph Essin";
+				TargetAttributes = {
+					CAFD07461CC4214E005A2EDB = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = CAFD07421CC4214E005A2EDB /* Build configuration list for PBXProject "JXColorButton Test" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CAFD073E1CC4214E005A2EDB;
+			productRefGroup = CAFD07481CC4214E005A2EDB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CAFD07461CC4214E005A2EDB /* JXColorButton Test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CAFD07451CC4214E005A2EDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAFD074D1CC4214E005A2EDB /* Assets.xcassets in Resources */,
+				CAFD07501CC4214E005A2EDB /* MainMenu.xib in Resources */,
+				CAFD07631CC421BB005A2EDB /* Window.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CAFD07431CC4214E005A2EDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAFD075D1CC4218B005A2EDB /* JXColorGridView.swift in Sources */,
+				CAFD07601CC4218B005A2EDB /* WindowController.swift in Sources */,
+				CAFD075E1CC4218B005A2EDB /* JXColorGridViewDelegate.swift in Sources */,
+				CAFD075F1CC4218B005A2EDB /* NSColor Extension.swift in Sources */,
+				CAFD074B1CC4214E005A2EDB /* AppDelegate.swift in Sources */,
+				CAFD075C1CC4218B005A2EDB /* JXColorButton.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CAFD074E1CC4214E005A2EDB /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CAFD074F1CC4214E005A2EDB /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CAFD07521CC4214E005A2EDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CAFD07531CC4214E005A2EDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		CAFD07551CC4214E005A2EDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "JXColorButton Test/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "josephessin.JXColorButton-Test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CAFD07561CC4214E005A2EDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "JXColorButton Test/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "josephessin.JXColorButton-Test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CAFD07421CC4214E005A2EDB /* Build configuration list for PBXProject "JXColorButton Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAFD07521CC4214E005A2EDB /* Debug */,
+				CAFD07531CC4214E005A2EDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CAFD07541CC4214E005A2EDB /* Build configuration list for PBXNativeTarget "JXColorButton Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAFD07551CC4214E005A2EDB /* Debug */,
+				CAFD07561CC4214E005A2EDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CAFD073F1CC4214E005A2EDB /* Project object */;
+}

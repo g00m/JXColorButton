@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="WindowController" customModule="JXColorButton_Demo" customModuleProvider="target">
+            <connections>
+                <outlet property="colorPicker1" destination="rWb-GR-fkv" id="rHz-GA-svc"/>
+                <outlet property="colorPicker2" destination="V5r-uO-kZn" id="x1M-On-M5i"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="Pcy-qQ-pYZ"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="JXColorButton Demo" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="452" height="67"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="452" height="67"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V5r-uO-kZn" customClass="JXColorButton" customModule="JXColorButton_Demo" customModuleProvider="target">
+                        <rect key="frame" x="229" y="34" width="29" height="22"/>
+                        <connections>
+                            <outlet property="delegate" destination="-2" id="N8k-LF-nqO"/>
+                        </connections>
+                    </customView>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rWb-GR-fkv" customClass="JXColorButton" customModule="JXColorButton_Demo" customModuleProvider="target">
+                        <rect key="frame" x="192" y="34" width="29" height="22"/>
+                        <connections>
+                            <outlet property="delegate" destination="-2" id="OM7-0C-ofM"/>
+                        </connections>
+                    </customView>
+                </subviews>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="324" y="298.5"/>
+        </window>
+    </objects>
+</document>

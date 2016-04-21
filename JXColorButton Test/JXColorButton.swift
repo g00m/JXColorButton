@@ -179,7 +179,7 @@ import Cocoa
     /// of preventsDefault.
     override func changeColor(sender: AnyObject?) {
         if !preventsDefault {
-            //super.changeColor(sender)
+            self.nextResponder?.tryToPerform(#selector(changeColor(_:)), with: sender)
         }
     }
     

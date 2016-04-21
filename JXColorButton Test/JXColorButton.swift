@@ -113,6 +113,7 @@ import Cocoa
             return icon
         }
     }
+    
     /// Whether or not the image is rendered as a template color specified by imageColor.
     @IBInspectable var imageIsTemplate: Bool = false { didSet(value) { updateImage() } }
     /// The color of the image when it is on a dark background
@@ -252,6 +253,7 @@ import Cocoa
         } else {
             showColorPanel()
         }
+        updateImage()
     }
     
     // MARK: Private Methods

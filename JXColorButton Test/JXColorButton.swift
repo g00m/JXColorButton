@@ -102,6 +102,17 @@ import Cocoa
     /// Whether or not the popover is displayed in dark mode.
     @IBInspectable var darkMode: Bool = false { didSet(value) { configure() } }
     
+    /// The image that the button draws inside the rectangle, if any.
+    @IBInspectable var image: NSImage?
+    /// Whether or not the image is rendered as a template color specified by imageColor.
+    @IBInspectable var imageIsTemplate: Bool = true
+    /// The color of the image
+    @IBInspectable var imageColor: NSColor = NSColor.controlShadowColor()
+    /// Vertical padding of the image in points
+    @IBInspectable var imageVerticalPadding: CGFloat = 2.0
+    /// Horizontal padding of the image in points
+    @IBInspectable var imageHorizontalPadding: CGFloat = 2.0
+    
     /// A two-dimensional array of colors to show in the pop-over view.
     /// Think of it as colors[row][column].
     /// JEColorButton assumes that this is NOT a jagged array, so be sure that all your
@@ -115,18 +126,6 @@ import Cocoa
     var rows: Int { get { return colors.count  } }
     /// The number of columns of colors.
     var columns: Int { get { return colors[0].count } }
-    
-    /// The image that the button draws inside the rectangle, if any.
-    var image: NSImage?
-    
-    /// Whether or not the image is rendered as a template color specified by imageColor.
-    var imageIsTemplate: Bool = true
-    /// The color of the image
-    var imageColor: NSColor = NSColor.controlShadowColor()
-    /// Vertical padding of the image in points
-    var imageVerticalPadding: CGFloat = 2.0
-    /// Horizontal padding of the image in points
-    var imageHorizontalPadding: CGFloat = 2.0
     
     /// The popover that the button shows.
     private var popover: NSPopover = NSPopover()

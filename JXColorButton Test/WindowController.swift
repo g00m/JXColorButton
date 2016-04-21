@@ -36,6 +36,9 @@ class WindowController: NSWindowController, JXColorButtonDelegate {
         colorPicker1.selectedMenuItemColor = NSColor.whiteColor()
         colorPicker1.selectedMenuItemTextColor = NSColor.blackColor()
         
+        colorPicker2.color = NSColor.redColor()
+        colorPicker2.image = NSImage(named: NSImageNameColorPanel)
+        
         // Set the delegates
         colorPicker1.delegate = self
         colorPicker2.delegate = self

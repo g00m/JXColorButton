@@ -63,6 +63,7 @@ import Cocoa
     @IBInspectable var color: NSColor = JXColorButton.defaultBackgroundColor {
         willSet(value) {
             layer?.backgroundColor = value.CGColor
+            layer?.setNeedsDisplay()
             if !colorReferenced(value) {
                 customColor = colorPanel.color
             }
@@ -115,6 +116,18 @@ import Cocoa
     /// The number of columns of colors.
     var columns: Int { get { return colors[0].count } }
     
+    /// The image that the button draws inside the rectangle, if any.
+    var image: NSImage?
+    
+    /// Whether or not the image is rendered as a template color specified by imageColor.
+    var imageIsTemplate: Bool = true
+    /// The color of the image
+    var imageColor: NSColor = NSColor.controlShadowColor()
+    /// Vertical padding of the image in points
+    var imageVerticalPadding: CGFloat = 2.0
+    /// Horizontal padding of the image in points
+    var imageHorizontalPadding: CGFloat = 2.0
+    
     /// The popover that the button shows.
     private var popover: NSPopover = NSPopover()
     
@@ -142,6 +155,34 @@ import Cocoa
         super.init(frame: frameRect)
         setup()
         configure()
+    }
+    
+    // MARK: Internal
+    
+    
+    override func drawRect(dirtyRect: NSRect) {
+        super.drawRect(dirtyRect)
+        
+        if let pic = image {
+            layer!.sublayers = nil
+            let deviceScale = NSScreen.mainScreen()!.backingScaleFactor
+            let sublayer = CALayer()
+            
+            let rawWidth = pic.size.width
+            let rawHeight = pic.size.height
+            let containerWidth = bounds.size.width - (imageHorizontalPadding * 2.0)
+            let containerHeight = bounds.size.height - (imageVerticalPadding * 2.0)
+            
+            let imgScale = min(containerWidth / rawWidth, containerHeight / rawHeight)
+            let newWidth = rawWidth * imgScale
+            let newHeight = rawHeight * imgScale
+            
+            sublayer.bounds = CGRectMake(0, 0, newWidth, newHeight)
+            sublayer.contents = pic.layerContentsForContentsScale(deviceScale)
+            sublayer.contentsGravity = kCAGravityResizeAspectFill
+            sublayer.position = NSMakePoint(self.bounds.size.width / 2, self.bounds.size.height / 2)
+            layer!.addSublayer(sublayer)
+        }
     }
     
     // MARK: Public Methods
@@ -197,10 +238,11 @@ import Cocoa
     
     private func setup() {
         // Configure the button's layer
-        self.wantsLayer = true
-        self.layer = CALayer()
+        wantsLayer = true
+        layer = CALayer()
+        layer!.delegate = self
         // Configure the border properties:
-        self.layer!.cornerRadius = borderRadius
+        layer!.cornerRadius = borderRadius
         layer!.borderColor = borderColor
         layer!.borderWidth = borderWidth
         // Configure the background:

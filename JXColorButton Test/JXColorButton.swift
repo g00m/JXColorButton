@@ -163,9 +163,12 @@ import Cocoa
     override func drawRect(dirtyRect: NSRect) {
         super.drawRect(dirtyRect)
         
+        // If there's an image/icon specified, let's draw it with respect to the padding from the border
+        // and its aspect ratio using an image sublayer.
+        // This was far more complicated than I had anticipated.
         if let pic = image {
             layer!.sublayers = nil
-            let deviceScale = NSScreen.mainScreen()!.backingScaleFactor
+            let deviceScale = self.window!.backingScaleFactor
             let sublayer = CALayer()
             
             let rawWidth = pic.size.width

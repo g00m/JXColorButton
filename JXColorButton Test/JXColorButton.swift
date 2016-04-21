@@ -4,6 +4,7 @@
 //
 //  Created by Joseph Essin on 4/15/16.
 //
+// JXColorButton
 
 import Cocoa
 

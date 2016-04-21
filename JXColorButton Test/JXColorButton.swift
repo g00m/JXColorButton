@@ -284,7 +284,7 @@ import Cocoa
         // Configure our popover:
         popover.contentViewController = popoverViewController
         
-        needsDisplay = true
+        layer!.setNeedsDisplay()
     }
     
     

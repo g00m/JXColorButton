@@ -113,15 +113,15 @@ import Cocoa
         }
     }
     /// Whether or not the image is rendered as a template color specified by imageColor.
-    @IBInspectable var imageIsTemplate: Bool = false
+    @IBInspectable var imageIsTemplate: Bool = false { didSet(value) { updateImage() } }
     /// The color of the image when it is on a dark background
-    @IBInspectable var imageLightColor: NSColor = NSColor.whiteColor()
+    @IBInspectable var imageLightColor: NSColor = NSColor.whiteColor() { didSet(value) { updateImage() } }
     /// The color of hte image when it is on a light or transparent background
-    @IBInspectable var imageNormalColor: NSColor = NSColor.controlDarkShadowColor()
+    @IBInspectable var imageNormalColor: NSColor = NSColor.controlDarkShadowColor() { didSet(value) { updateImage() } }
     /// Vertical padding of the image in points
-    @IBInspectable var imageVerticalPadding: CGFloat = 2.0
+    @IBInspectable var imageVerticalPadding: CGFloat = 2.0 { didSet(value) { layer?.setNeedsDisplay() } }
     /// Horizontal padding of the image in points
-    @IBInspectable var imageHorizontalPadding: CGFloat = 2.0
+    @IBInspectable var imageHorizontalPadding: CGFloat = 2.0 { didSet(value) { layer?.setNeedsDisplay() } }
     
     /// Set this to be true if you want the color change events to stop with this button,
     /// false if you want them to keep traveling up the chain.
@@ -280,6 +280,10 @@ import Cocoa
         layer!.borderWidth = borderWidth
         // Configure the background:
         layer!.backgroundColor = color.CGColor
+        layer!.shadowOffset = CGSize(width: 0, height: -0.5)
+        layer!.shadowColor = NSColor.blackColor().CGColor
+        layer!.shadowRadius = 0
+        layer!.shadowOpacity = 0.2
         
         // Configure our popover:
         popover.contentViewController = popoverViewController

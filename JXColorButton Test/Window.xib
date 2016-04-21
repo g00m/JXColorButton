@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="WindowController" customModule="JXColorButton_Demo" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="WindowController" customModule="JXColorButton_Test" customModuleProvider="target">
             <connections>
                 <outlet property="colorPicker1" destination="rWb-GR-fkv" id="rHz-GA-svc"/>
                 <outlet property="colorPicker2" destination="V5r-uO-kZn" id="x1M-On-M5i"/>
@@ -23,13 +23,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="452" height="67"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V5r-uO-kZn" customClass="JXColorButton" customModule="JXColorButton_Demo" customModuleProvider="target">
-                        <rect key="frame" x="229" y="34" width="29" height="22"/>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V5r-uO-kZn" customClass="JXColorButton" customModule="JXColorButton_Test" customModuleProvider="target">
+                        <rect key="frame" x="229" y="20" width="50" height="36"/>
                         <connections>
                             <outlet property="delegate" destination="-2" id="N8k-LF-nqO"/>
                         </connections>
                     </customView>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rWb-GR-fkv" customClass="JXColorButton" customModule="JXColorButton_Demo" customModuleProvider="target">
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rWb-GR-fkv" customClass="JXColorButton" customModule="JXColorButton_Test" customModuleProvider="target">
                         <rect key="frame" x="192" y="34" width="29" height="22"/>
                         <connections>
                             <outlet property="delegate" destination="-2" id="OM7-0C-ofM"/>

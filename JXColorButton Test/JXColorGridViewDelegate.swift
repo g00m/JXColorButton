@@ -3,7 +3,6 @@
 //  JEColorButton
 //
 //  Created by Joseph Essin on 4/16/16.
-//  Copyright © 2016 Joseph Essin. All rights reserved.
 //
 
 import Foundation

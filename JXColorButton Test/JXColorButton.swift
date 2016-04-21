@@ -3,7 +3,6 @@
 //  JEColorButton
 //
 //  Created by Joseph Essin on 4/15/16.
-//  Copyright © 2016 Joseph Essin. All rights reserved.
 //
 
 import Cocoa
@@ -63,10 +62,11 @@ import Cocoa
     @IBInspectable var color: NSColor = JXColorButton.defaultBackgroundColor {
         willSet(value) {
             layer?.backgroundColor = value.CGColor
-            layer?.setNeedsDisplay()
             if !colorReferenced(value) {
                 customColor = colorPanel.color
             }
+            updateImage()
+            layer?.setNeedsDisplay()
             // Call the delegate
             if let receiver = delegate {
                 receiver.colorSelected(self, color: value)
@@ -103,15 +103,29 @@ import Cocoa
     @IBInspectable var darkMode: Bool = false { didSet(value) { configure() } }
     
     /// The image that the button draws inside the rectangle, if any.
-    @IBInspectable var image: NSImage?
+    @IBInspectable var image: NSImage? {
+        set(value) {
+            icon = value
+            updateImage()
+        }
+        get {
+            return icon
+        }
+    }
     /// Whether or not the image is rendered as a template color specified by imageColor.
-    @IBInspectable var imageIsTemplate: Bool = true
-    /// The color of the image
-    @IBInspectable var imageColor: NSColor = NSColor.controlShadowColor()
+    @IBInspectable var imageIsTemplate: Bool = false
+    /// The color of the image when it is on a dark background
+    @IBInspectable var imageLightColor: NSColor = NSColor.whiteColor()
+    /// The color of hte image when it is on a light or transparent background
+    @IBInspectable var imageNormalColor: NSColor = NSColor.controlDarkShadowColor()
     /// Vertical padding of the image in points
     @IBInspectable var imageVerticalPadding: CGFloat = 2.0
     /// Horizontal padding of the image in points
     @IBInspectable var imageHorizontalPadding: CGFloat = 2.0
+    
+    /// Set this to be true if you want the color change events to stop with this button,
+    /// false if you want them to keep traveling up the chain.
+    @IBInspectable var preventsDefault: Bool = false
     
     /// A two-dimensional array of colors to show in the pop-over view.
     /// Think of it as colors[row][column].
@@ -136,6 +150,9 @@ import Cocoa
     /// A handle to the color picker.
     private let colorPanel = NSColorPanel.sharedColorPanel()
     
+    /// The image to render--use image property for public access.
+    private var icon: NSImage?
+    
     /// The height of the menu item at the top and bottom of the popover for the default color
     /// and custom color, respectively. This is calculated based on the vertical box spacing
     /// and the heigh tof the color boxes.
@@ -157,6 +174,20 @@ import Cocoa
     }
     
     // MARK: Internal
+    
+    /// Handles the first responder event changeColor based on the value
+    /// of preventsDefault.
+    override func changeColor(sender: AnyObject?) {
+        if !preventsDefault {
+            //super.changeColor(sender)
+        }
+    }
+    
+    /// This button has the potential to be the first responder to
+    /// handle the changeColor event.
+    override var acceptsFirstResponder: Bool {
+        get { return true }
+    }
     
     
     override func drawRect(dirtyRect: NSRect) {
@@ -252,6 +283,8 @@ import Cocoa
         
         // Configure our popover:
         popover.contentViewController = popoverViewController
+        
+        needsDisplay = true
     }
     
     
@@ -290,6 +323,27 @@ import Cocoa
             }
         }
         return false
+    }
+    
+    /// Returns the brightness of a specified color, between 0 and 1.
+    /// - Parameter color: The color whose brightness is to be measured.
+    private func colorBrightness(color: NSColor) -> CGFloat {
+        return color.colorUsingColorSpaceName(NSCalibratedRGBColorSpace)!.brightnessComponent
+    }
+    
+    /// Updates the template image
+    private func updateImage() {
+        if imageIsTemplate && image != nil {
+            // Check the color of our background and make sure the
+            let brightness = colorBrightness(color)
+            if brightness >= 0.5 || color.alphaComponent <= 0.5 {
+                icon = image!.tintedImage(imageNormalColor)
+            } else {
+                icon = image!.tintedImage(imageLightColor)
+            }
+            // Force a redraw:
+            layer?.setNeedsDisplay()
+        }
     }
     
     // MARK: Color Panel

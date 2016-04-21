@@ -2,7 +2,6 @@
 //  NSColor Extension.swift
 //  JEColorButton
 //
-//  Created by Joseph Essin on 4/17/16.
 //
 
 import Cocoa

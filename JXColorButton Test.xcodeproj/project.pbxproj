@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA684DC91CC8875500F6F652 /* NSImageView Tinted Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA684DC81CC8875500F6F652 /* NSImageView Tinted Extension.swift */; };
 		CAFCE0AA1CC4250B00D158B2 /* JXColorButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFCE0A91CC4250B00D158B2 /* JXColorButtonDelegate.swift */; };
 		CAFD074B1CC4214E005A2EDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD074A1CC4214E005A2EDB /* AppDelegate.swift */; };
 		CAFD074D1CC4214E005A2EDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAFD074C1CC4214E005A2EDB /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA684DC81CC8875500F6F652 /* NSImageView Tinted Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImageView Tinted Extension.swift"; sourceTree = "<group>"; };
 		CAFCE0A91CC4250B00D158B2 /* JXColorButtonDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXColorButtonDelegate.swift; sourceTree = "<group>"; };
 		CAFD07471CC4214E005A2EDB /* JXColorButton Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "JXColorButton Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFD074A1CC4214E005A2EDB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				CAFD07591CC4218B005A2EDB /* JXColorGridViewDelegate.swift */,
 				CAFD075A1CC4218B005A2EDB /* NSColor Extension.swift */,
 				CAFCE0A91CC4250B00D158B2 /* JXColorButtonDelegate.swift */,
+				CA684DC81CC8875500F6F652 /* NSImageView Tinted Extension.swift */,
 			);
 			name = JXColorButton;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 				CAFCE0AA1CC4250B00D158B2 /* JXColorButtonDelegate.swift in Sources */,
 				CAFD075E1CC4218B005A2EDB /* JXColorGridViewDelegate.swift in Sources */,
 				CAFD075F1CC4218B005A2EDB /* NSColor Extension.swift in Sources */,
+				CA684DC91CC8875500F6F652 /* NSImageView Tinted Extension.swift in Sources */,
 				CAFD074B1CC4214E005A2EDB /* AppDelegate.swift in Sources */,
 				CAFD075C1CC4218B005A2EDB /* JXColorButton.swift in Sources */,
 			);

@@ -38,7 +38,7 @@ import Cocoa
     /// The border color of the button.
     @IBInspectable var borderColor: CGColor = NSColor.lightGrayColor().CGColor { didSet(value) { layer?.borderColor = value } }
     /// The border width of the button.
-    @IBInspectable var borderWidth: CGFloat = 1.0 { didSet(value) { layer?.borderWidth = value } }
+    @IBInspectable var borderWidth: CGFloat = 0.5 { didSet(value) { layer?.borderWidth = value } }
     
     /// True if the button allows the user to pick a custom color.
     @IBInspectable var usesCustomColor: Bool = true { didSet(value) { configure() } }
@@ -72,6 +72,9 @@ import Cocoa
             if let receiver = delegate {
                 receiver.colorSelected(self, color: value)
             }
+        }
+        didSet(value) {
+            updateImage()
         }
     }
     

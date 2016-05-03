@@ -79,7 +79,7 @@ import Cocoa
     }
     
     /// The background color of the popover, if any.
-    @IBInspectable var popoverBackgroundColor: NSColor?
+    @IBInspectable var popoverBackgroundColor: NSColor? { didSet(value) { refreshPopover() } }
     
     /// The horizontal spacing between colors in the grid.
     @IBInspectable var horizontalBoxSpacing: CGFloat = 4.0 { didSet(value) { configure() } }

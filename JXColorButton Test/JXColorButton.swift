@@ -80,7 +80,6 @@ import Cocoa
     
     /// The background color of the popover, if any.
     @IBInspectable var popoverBackgroundColor: NSColor? { didSet(value) { refreshPopover() } }
-    
     /// The horizontal spacing between colors in the grid.
     @IBInspectable var horizontalBoxSpacing: CGFloat = 4.0 { didSet(value) { configure() } }
     /// The vertical spacing between colors in the grid.
@@ -163,6 +162,12 @@ import Cocoa
     /// and the heigh tof the color boxes.
     var menuHeight: CGFloat { get { return ((2.0 * verticalBoxSpacing) + boxHeight) } }
     
+    /// This button has the potential to be the first responder to
+    /// handle the changeColor event.
+    override var acceptsFirstResponder: Bool {
+        get { return true }
+    }
+    
     // MARK: Initializers
     // These intializers configure the button as soon as its created.
     
@@ -187,13 +192,6 @@ import Cocoa
             self.nextResponder?.tryToPerform(#selector(changeColor(_:)), with: sender)
         }
     }
-    
-    /// This button has the potential to be the first responder to
-    /// handle the changeColor event.
-    override var acceptsFirstResponder: Bool {
-        get { return true }
-    }
-    
     
     override func drawRect(dirtyRect: NSRect) {
         super.drawRect(dirtyRect)

@@ -246,7 +246,7 @@ class JXColorGridView: NSView {
         if menuSelectionState == .ColorGridSelection {
             delegate.colorWasSelected(self, color: selectedColor, selectionType: .ColorGridSelection)
         } else if menuSelectionState == .CustomColorPanelDesired {
-            delegate.colorWasSelected(self, color: nil, selectionType: .CustomColorPanelDesired)
+            delegate.colorWasSelected(self, color: parent!.customColor, selectionType: .CustomColorPanelDesired)
         } else if menuSelectionState == .DefaultColorSelection {
             delegate.colorWasSelected(self, color: parent!.defaultColor, selectionType: .DefaultColorSelection)
         } else if menuSelectionState == .CustomColorSelection {
@@ -260,6 +260,30 @@ class JXColorGridView: NSView {
     /// - Parameter point: The upper-left corner of the box in view coordinates.
     /// - Parameter color: The color of the box to draw.
     private func drawColorBoxAt(point: CGPoint, color: NSColor, selected: Bool) {
+        let rect = CGRect(x: point.x , y: point.y, width: parent!.boxWidth, height: parent!.boxHeight)
+        if color.isEqualToColor(NSColor.clearColor()) {
+            // Clear color
+            NSColor.whiteColor().setFill()
+            NSBezierPath.setDefaultLineWidth(2.0)
+            NSColor.redColor().setStroke()
+            let line = NSBezierPath()
+            line.moveToPoint(NSMakePoint(point.x, point.y + parent!.boxHeight))
+            line.lineToPoint(NSMakePoint(point.x + parent!.boxWidth, point.y))
+            line.stroke()
+            NSBezierPath.fillRect(rect)
+            line.stroke()
+            adjustStrokeForSelection(selected)
+            NSBezierPath.strokeRect(rect)
+        } else {
+            // Not clear color
+            color.setFill()
+            adjustStrokeForSelection(selected)
+            NSBezierPath.fillRect(rect)
+            NSBezierPath.strokeRect(rect)
+        }
+    }
+    
+    private func adjustStrokeForSelection(selected: Bool) {
         if selected {
             parent!.selectedBoxColor.setStroke()
             NSBezierPath.setDefaultLineWidth(parent!.selectedBoxBorderWidth)
@@ -267,10 +291,6 @@ class JXColorGridView: NSView {
             parent!.boxBorderColor.setStroke()
             NSBezierPath.setDefaultLineWidth(parent!.boxBorderWidth)
         }
-        color.setFill()
-        let rect = CGRect(x: point.x , y: point.y, width: parent!.boxWidth, height: parent!.boxHeight)
-        NSBezierPath.fillRect(rect)
-        NSBezierPath.strokeRect(rect)
     }
     
     /// Draws a truncanted string as a menu label at the specified location.

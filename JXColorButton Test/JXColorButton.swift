@@ -123,10 +123,6 @@ import Cocoa
     /// Horizontal padding of the image in points
     @IBInspectable var imageHorizontalPadding: CGFloat = 2.0 { didSet(value) { layer?.setNeedsDisplay() } }
     
-    /// Set this to be true if you want the color change events to stop with this button,
-    /// false if you want them to keep traveling up the chain.
-    @IBInspectable var preventsDefault: Bool = false
-    
     /// A two-dimensional array of colors to show in the pop-over view.
     /// Think of it as colors[row][column].
     /// JEColorButton assumes that this is NOT a jagged array, so be sure that all your
@@ -181,14 +177,6 @@ import Cocoa
     
     // MARK: Internal
     
-    /// Handles the first responder event changeColor based on the value
-    /// of preventsDefault.
-    override func changeColor(sender: AnyObject?) {
-        if !preventsDefault {
-            self.nextResponder?.tryToPerform(#selector(changeColor(_:)), with: sender)
-        }
-    }
-    
     override func drawRect(dirtyRect: NSRect) {
         super.drawRect(dirtyRect)
         
@@ -230,6 +218,7 @@ import Cocoa
     
     /// Call this function when the button is clicked.
     func showColorPopover() {
+        if popover.shown { return }
         // Set our popover to be the right size:
         popover.contentSize = popoverRequiredFrameSize()
         popover.behavior = .Transient
@@ -243,15 +232,24 @@ import Cocoa
     
     func colorWasSelected(sender: JXColorGridView, color: NSColor?, selectionType: JXColorGridViewSelectionType) {
         popover.close()
+        NSLog("color was selected: " + String(selectionType.rawValue))
+        var color = color
         lastSelectionType = selectionType
+        if selectionType == .CustomColorPanelDesired {
+            if !colorPanel.visible {
+                showColorPanel()
+                color = nil
+            }
+        }
         if color != nil {
             self.color = color!
+            colorPanel.setTarget(nil)
             colorPanel.color = color!
-            delegate?.colorSelected(self, color: color!)
-        } else {
-            showColorPanel()
         }
         updateImage()
+        if color != nil { delegate?.colorSelected(self, color: color!) }
+        colorPanel.setTarget(self)
+        colorPanel.setAction(#selector(colorFromPanel(_:)))
     }
     
     // MARK: Private Methods
@@ -354,6 +352,8 @@ import Cocoa
     // MARK: Color Panel
     
     @objc private func colorFromPanel(sender: AnyObject?) {
+        if !colorPanel.visible { return }
+        NSLog("color panel")
         // Look at the last JXColorButton to have focus and alter it accordingly.
         if let lastColorButton = JXColorButton.lastColorButton {
             lastColorButton.color = colorPanel.color
@@ -370,6 +370,8 @@ import Cocoa
     override func mouseUp(theEvent: NSEvent) {
         super.mouseUp(theEvent)
         JXColorButton.lastColorButton = self
+        colorPanel.setTarget(self)
+        colorPanel.setAction(#selector(self.colorFromPanel(_:)))
         showColorPopover()
     }
 }

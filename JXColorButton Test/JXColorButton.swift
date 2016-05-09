@@ -68,10 +68,6 @@ import Cocoa
             }
             updateImage()
             layer?.setNeedsDisplay()
-            // Call the delegate
-            if let receiver = delegate {
-                receiver.colorSelected(self, color: value)
-            }
         }
         didSet(value) {
             updateImage()
@@ -251,6 +247,7 @@ import Cocoa
         if color != nil {
             self.color = color!
             colorPanel.color = color!
+            delegate?.colorSelected(self, color: color!)
         } else {
             showColorPanel()
         }
@@ -364,6 +361,7 @@ import Cocoa
             if !lastColorButton.colorReferenced(colorPanel.color) {
                 lastColorButton.customColor = colorPanel.color
             }
+            lastColorButton.delegate?.colorSelected(self, color: lastColorButton.color)
         }
     }
     
@@ -371,7 +369,7 @@ import Cocoa
     
     override func mouseUp(theEvent: NSEvent) {
         super.mouseUp(theEvent)
-        showColorPopover()
         JXColorButton.lastColorButton = self
+        showColorPopover()
     }
 }

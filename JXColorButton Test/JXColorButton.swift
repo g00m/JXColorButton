@@ -210,10 +210,15 @@ import Cocoa
     /// Shows the OS X color picker.
     func showColorPanel() {
         colorPanel.showsAlpha = usesAlphaChannel
-        colorPanel.setTarget(self)
-        colorPanel.setAction(#selector(self.colorFromPanel(_:)))
+        configureColorPanel()
         colorPanel.continuous = true
         NSApplication.sharedApplication().orderFrontColorPanel(self)
+    }
+    
+    /// Configures the color panel to respond to this color button
+    private func configureColorPanel() {
+        colorPanel.setTarget(self)
+        colorPanel.setAction(#selector(self.colorFromPanel(_:)))
     }
     
     /// Call this function when the button is clicked.
@@ -232,7 +237,6 @@ import Cocoa
     
     func colorWasSelected(sender: JXColorGridView, color: NSColor?, selectionType: JXColorGridViewSelectionType) {
         popover.close()
-        NSLog("color was selected: " + String(selectionType.rawValue))
         var color = color
         lastSelectionType = selectionType
         if selectionType == .CustomColorPanelDesired {
@@ -283,7 +287,7 @@ import Cocoa
         layer!.shadowColor = NSColor.blackColor().CGColor
         layer!.shadowRadius = 0
         layer!.shadowOpacity = 0.2
-        
+        configureColorPanel()
         // Configure our popover:
         popover.contentViewController = popoverViewController
         
@@ -353,7 +357,6 @@ import Cocoa
     
     @objc private func colorFromPanel(sender: AnyObject?) {
         if !colorPanel.visible { return }
-        NSLog("color panel")
         // Look at the last JXColorButton to have focus and alter it accordingly.
         if let lastColorButton = JXColorButton.lastColorButton {
             lastColorButton.color = colorPanel.color

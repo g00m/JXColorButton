@@ -16,7 +16,7 @@ import Cocoa
     case DefaultColorSelection
     /// A color was selected from the custom color menu option
     case CustomColorSelection
-    /// A custom color selection is incoming, and the panel needs to be open
+    /// A custom color selection is incoming, and the panel 12needs to be open
     case CustomColorPanelDesired
     /// Nothing was selected.
     case NoSelection

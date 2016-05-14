@@ -16,9 +16,9 @@ extension NSColor {
         // Slight modifications were made by Joseph E. to be NSColor compatible instead
         // of for UIColor.
         
-        if self == otherColor {
-            return true
-        }
+        //if self == otherColor {
+        //    return true
+        //}
         
         let colorSpaceRGB = CGColorSpaceCreateDeviceRGB()
         let convertColorToRGBSpace : ((color : NSColor) -> NSColor?) = { (color) -> NSColor? in
@@ -44,4 +44,9 @@ extension NSColor {
             return false
         }
     }
+}
+
+func ==(left: NSColor, right: NSColor) -> Bool {
+    if left.isEqualToColor(right) { return true }
+    return false
 }

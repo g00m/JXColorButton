@@ -32,7 +32,6 @@ class WindowController: NSWindowController, JXColorButtonDelegate {
         colorPicker1.borderRadius = 0
         colorPicker1.boxBorderColor = NSColor.blackColor()
         colorPicker1.selectedBoxColor = NSColor.whiteColor()
-        //colorPicker1.popoverBackgroundColor = NSColor.greenColor()
         colorPicker1.darkMode = true
         colorPicker1.selectedMenuItemColor = NSColor.whiteColor()
         colorPicker1.selectedMenuItemTextColor = NSColor.blackColor()
@@ -57,12 +56,96 @@ class WindowController: NSWindowController, JXColorButtonDelegate {
     }
 }
 ```
+
+## Development Information
+JXColorButton has been utilized in an application of my design, but is not fully tested. If you encounter bugs and have changes, feel free to make a pull request or file an issue here on GitHub. 
+
 ## What you can customize
-JXColorButton provides a lot of options to customize. Here's the full spec:
+JXColorButton provides a lot of options to customize, but picks intelligent default values if you don't specify (although you do have to at least set the delegate if you want to know the selected color as it changes). Here's the full spec:
 
-* defaultBackgroundColor
-   This is a static property that represents the button's default background color if you don't specify one.
+* **defaultBackgroundColor** 
 
-You can customize the colors, dark/light background vibrancy of the popover, menu text, coloring, spacing, selection highlight colors, custom image/icon, and a host of other options. Many of these customizations are demonstrated in the sample project provided. The code is well documented, tested on OS X 10.11 (although it needs more testing), and written in Swift 2.
+   This is a static NSColor property that represents the button's default background color if you don't specify one.
+* **lastColorButton** 
+
+   This is a static JXColorButton property that specifies the last selected color button. Change this to alter which JXColorButton will receive system color panel notifications.
+* **delegate** 
+
+   This is the object that implements the colorSelected(sender: JXColorButton, color: NSColor) function to receive the selected color whenever the user makes a selection.
+* **borderRadius** 
+
+   A CGFloat representing the button's border radius.
+* **borderColor** 
+
+   An NSColor representing the button's border color.
+* **borderWidth** 
+
+   The width of the button's border.
+* **usesCustomColor** 
+
+   Whether or not the menu has a "Custom Color" option displayed at the bottom of the color selection popover.
+* **usesDefaultColor** 
+
+   Whether or not the menu has a "Default Color" option displayed at the top of the color selection popover.
+* **usesAlphaChannel** 
+
+   Whether or not the color popover allows the color panel to pick a transparent color.
+*  **defaultColorTitle** 
+
+    A String representing the title of the default color menu item, if usesDefaultColor is true.
+*  **customColorTitle** 
+
+   A String representing the title of the custom color menu item, if usesCustomColor is true.
+* **defaultColor** 
+
+   An NSColor representing the color of the "Default Color" menu item, if usesDefaultColor is true.
+* **customColor** 
+
+   An NSColor representing the color of the "Custom Color" menu item, if usesCustomColor is true.
+* **color** 
+
+   An NSColor representing the currently selected color.
+* **popoverBackgroundColor** 
+
+   An NSColor representing the popover's background color. Possible to change, but not recommended per the Apple Human Interface Guidelines.
+* **horizontalBoxSpacing** 
+
+   A CGFloat representing the horizontal distance between color boxes as rendered in the color selection popover.
+* **verticalBoxSpacing** 
+
+   A CGFloat representing the vertical distance between color boxes as rendered in the color selection popover.
+* **boxWidth** 
+
+   A CGFloat representing the width of each color box as rendered in the color selection popover.
+* **boxHeight** 
+
+   A CGFloat representing the height of each color box as rendered in the color selection popover.
+* **selectedBoxColor** 
+
+   A CGFloat representing the color of the selected box's border in the color selection popover. Defaults to the system selection color.
+* **boxBorderWidth** 
+
+   A CGFloat representing the border width of the color boxes in the color selection popover.
+* **selectedBoxBorderWidth** 
+
+   An NSColor representing the border width of the selected color box in the color selection popover.
+* **boxBorderColor** 
+
+   An NSColor representing the color of the color box border in the color selection popover.
+* **selectedMenuItemColor** 
+
+   An NSColor representing the menu item selection color in the color selection popover. Defaults to the system selection color.
+* **selectedMenuItemTextColor** 
+
+   An NSColor representing the color of selected menu item text in the color selection popover. Defaults to the system text selection color.
+* **textColor** 
+
+   An NSColor representing the color of the menu item text in the color selection popover.
+* **darkMode**
+
+   Whether or not the popover appears as a dark popover or not.
+* **** 
+
+
 
 

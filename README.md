@@ -166,7 +166,7 @@ JXColorButton provides a lot of options to customize, but picks intelligent defa
 
    A 2D array of NSColors specifying the colors the users can select in the color selection popover. These should not include the default color or custom color, if specified.
 
-## Licensing
+## License
 JXColorButton is provided under the MIT License.
 
 > The MIT License (MIT)

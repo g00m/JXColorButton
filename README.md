@@ -22,14 +22,14 @@ class WindowController: NSWindowController, JXColorButtonDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
         
-        // Always needs to be a regular a x b array. Jagged arrays don't work.
+        // Row x Column array representing the colors the user can select from our color popover in the JXColorButton.
         colorPicker2.colors = [
             [ NSColor.whiteColor(), NSColor.blackColor(), NSColor.redColor(), NSColor.darkGrayColor() ],
             [ NSColor.greenColor(), NSColor.purpleColor(), NSColor.orangeColor(), NSColor.lightGrayColor() ]
         ]
         
         colorPicker1.boxWidth = 30
-        colorPicker1.borderRadius = 0
+        colorPicker1.borderRadius = 1
         colorPicker1.boxBorderColor = NSColor.blackColor()
         colorPicker1.selectedBoxColor = NSColor.whiteColor()
         colorPicker1.darkMode = true
@@ -144,8 +144,24 @@ JXColorButton provides a lot of options to customize, but picks intelligent defa
 * **darkMode**
 
    Whether or not the popover appears as a dark popover or not.
-* **** 
+* **image** 
 
+   An NSImage representing the icon for the button to display.
+* **imageIsTemplate** 
 
+   Whether or not the image is supposed to be rendered as a template image or not.
+* **imageLightColor** 
 
+   The NSColor to render the image, if any, when it is on a light background. Only applies to template images.
+* **imageNormalColor** 
 
+   The color to render the image, if any, when it is on a dark background. Only applies to template images.
+* **imageVerticalPadding** 
+
+   A CGFloat representing the minimal distance between the image and the top and bottom sides of the JXColor Button.
+* **imageHorizontalPadding** 
+
+   A CGFloat representing the minimal distance between the image and the left and right sides of the JXColorButton.
+* **colors** 
+
+   A 2D array of NSColors specifying the colors the users can select in the color selection popover. These should not include the default color or custom color, if specified.

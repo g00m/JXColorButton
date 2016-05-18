@@ -58,7 +58,7 @@ class WindowController: NSWindowController, JXColorButtonDelegate {
 ```
 
 ## Development Information
-JXColorButton has been utilized in an application of my design, but is not fully tested. If you encounter bugs and have changes, feel free to make a pull request or file an issue here on GitHub. 
+JXColorButton has been utilized in an application of my design, but has not been fully tested in other scenarios. If you encounter bugs and have changes, feel free to make a pull request or file an issue here on GitHub. 
 
 ## What you can customize
 JXColorButton provides a lot of options to customize, but picks intelligent default values if you don't specify (although you do have to at least set the delegate if you want to know the selected color as it changes). Here's the full spec:

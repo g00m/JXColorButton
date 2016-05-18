@@ -25,6 +25,7 @@ import Cocoa
     ]
     
     /// The most recently clicked-on JXColorButton.
+    /// This is necessary for color panel integration.
     static var lastColorButton: JXColorButton?
     
     // MARK: Properties
@@ -59,7 +60,7 @@ import Cocoa
     @IBInspectable var customColor: NSColor = NSColor.magentaColor() { didSet(value) { refreshPopover() } }
     /// The background color of the button.
     /// If you need to set this back to the default, use
-    /// colorButton.backgroundColor = JEColorButton.defaultBackgroundColor
+    /// colorButton.backgroundColor b= JEColorButton.defaultBackgroundColor
     @IBInspectable var color: NSColor = JXColorButton.defaultBackgroundColor {
         willSet(value) {
             layer?.backgroundColor = value.CGColor

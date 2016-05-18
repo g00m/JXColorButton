@@ -4,7 +4,7 @@ JXColorButton is a custom color well for OS X to provide additional functionalit
 <img src="https://raw.githubusercontent.com/josephessin/JXColorButton/master/demo.gif" align="right" width="350" />
 
 ## Getting Setup
-To use a JXColorButton, simply drop a custom view in and set its class to JXColorButton and implement the JXColorButton delegate on your view controller or window controller. You can customize most of the settings for the JXColorButton via interface builder or via code.
+To use a JXColorButton, simply drop a custom view in, set its class to JXColorButton, and implement the JXColorButton delegate on your view controller or window controller. You can customize most of the settings for the JXColorButton via interface builder or in your code.
 
 Note: JXColorButton may or may not render properly in XCode, depending on build settings. Despite this, you can still drag from the custom view to create a reference to it. Once you have a reference, you can customize it via code. Investigation is underway to fix this.
 

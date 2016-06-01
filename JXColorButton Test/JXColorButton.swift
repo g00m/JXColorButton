@@ -10,7 +10,7 @@ import Cocoa
 
 /// An NSButton subclass that allows the user to pick a color from a list
 /// of colors in a popover. This button is highly configurable.
-@objc @IBDesignable class JXColorButton: NSView, JXColorGridViewDelegate {
+@objc @IBDesignable public class JXColorButton: NSView, JXColorGridViewDelegate {
   
   // MARK: Static Properties
   
@@ -157,14 +157,14 @@ import Cocoa
   
   /// This button has the potential to be the first responder to
   /// handle the changeColor event.
-  override var acceptsFirstResponder: Bool {
+  override public var acceptsFirstResponder: Bool {
     get { return true }
   }
   
   // MARK: Initializers
   // These intializers configure the button as soon as its created.
   
-  required init?(coder: NSCoder) {
+  required public init?(coder: NSCoder) {
     super.init(coder: coder)
     setup()
     configure()
@@ -178,7 +178,7 @@ import Cocoa
   
   // MARK: Internal
   
-  override func drawRect(dirtyRect: NSRect) {
+  override public func drawRect(dirtyRect: NSRect) {
     super.drawRect(dirtyRect)
     
     // If there's an image/icon specified, let's draw it with respect to the padding from the border
@@ -371,7 +371,7 @@ import Cocoa
   
   // MARK: Event Management
   
-  override func mouseUp(theEvent: NSEvent) {
+  override public func mouseUp(theEvent: NSEvent) {
     super.mouseUp(theEvent)
     JXColorButton.lastColorButton = self
     colorPanel.setTarget(self)

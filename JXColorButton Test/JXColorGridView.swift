@@ -129,7 +129,11 @@ class JXColorGridView: NSView {
     if let (x, y, color) = selection {
       let rect = CGRect(x: x , y: y, width: parent!.boxWidth, height: parent!.boxHeight)
       let brightness = parent!.colorBrightness(color)
-      if brightness < 0.5 { NSColor.whiteColor().setStroke() } else { NSColor.blackColor().setStroke() }
+      if color.alphaComponent > 0.5 {
+        if brightness < 0.5 { NSColor.whiteColor().setStroke() } else { NSColor.blackColor().setStroke() }
+      } else {
+        NSColor.blackColor().setStroke()
+      }
       NSBezierPath.setDefaultLineWidth(parent!.selectedBoxBorderWidth)
       NSBezierPath.strokeRect(rect)
     }

@@ -324,7 +324,7 @@ class JXColorGridView: NSView {
   private func drawMenuString(string: NSString, y: CGFloat, selected: Bool) {
     let str = UnwrappableString(string)
     let fontSize = menuTextSize(str)
-    let x: CGFloat = (2.0 * parent!.horizontalBoxSpacing) + parent!.boxWidth + parent!.horizontalMargin
+    let x: CGFloat = (2.0 * parent!.horizontalBoxSpacing) + parent!.boxWidth + (parent!.horizontalMargin * 1.8)
     let width: CGFloat = self.bounds.width - x
     let height: CGFloat = min(parent!.menuHeight - y, fontSize.height)
     let rect: NSRect = NSRect(origin: CGPoint(x: x, y: y), size: CGSize(width: width , height: height))

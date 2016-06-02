@@ -38,6 +38,9 @@ class JXColorGridView: NSView {
   /// Mouse tracking tag
   var trackingTag: NSTrackingRectTag?
   
+  /// X, Y, and Color of the selected color box.
+  var selection: (CGFloat, CGFloat, NSColor)? = nil
+  
   // MARK: Initializers
   
   /// Use this initializer inside of a JEColorButton to create a ColorGridView
@@ -117,9 +120,18 @@ class JXColorGridView: NSView {
         let color = parent!.colors[row][column]
         let x = ((boxWidth + xSpacing) * CGFloat(column)) + xMargin
         let y = menuHeight + ((boxHeight + ySpacing) * CGFloat(row)) + yMargin
-        let isSelected: Bool = (selectedColor != nil && selectedColor! === color) ? true : false
-        drawColorBoxAt(CGPoint(x: x, y: y), color: color, selected: isSelected)
+
+        drawColorBoxAt(CGPoint(x: x, y: y), color: color)
       }
+    }
+    
+    // Draw the selection last so it's above everything else:
+    if let (x, y, color) = selection {
+      let rect = CGRect(x: x , y: y, width: parent!.boxWidth, height: parent!.boxHeight)
+      let brightness = parent!.colorBrightness(color)
+      if brightness < 0.5 { NSColor.whiteColor().setStroke() } else { NSColor.blackColor().setStroke() }
+      NSBezierPath.setDefaultLineWidth(parent!.selectedBoxBorderWidth)
+      NSBezierPath.strokeRect(rect)
     }
     
     if parent!.usesCustomColor {
@@ -185,7 +197,9 @@ class JXColorGridView: NSView {
     mouse = self.convertPoint(theEvent.locationInWindow, fromView: nil)
     
     menuSelectionState = .ColorGridSelection
+    
     selectedColor = nil
+    selection = nil
     
     if parent!.usesDefaultColor {
       // See if the default color menu item is selected:
@@ -230,6 +244,7 @@ class JXColorGridView: NSView {
             mouse!.y >= y - halfBorder && mouse!.y <= y + parent!.boxHeight + halfBorder {
             // We're hovering over a color in the grid
             selectedColor = color
+            selection = (x, y, color)
             didSelect = true
             menuSelectionState = .ColorGridSelection
             break outerSearch // Exit both for loops
@@ -264,7 +279,7 @@ class JXColorGridView: NSView {
   /// Draws a color box at the specified point.
   /// - Parameter point: The upper-left corner of the box in view coordinates.
   /// - Parameter color: The color of the box to draw.
-  private func drawColorBoxAt(point: CGPoint, color: NSColor, selected: Bool) {
+  private func drawColorBoxAt(point: CGPoint, color: NSColor, selected: Bool = false) {
     let rect = CGRect(x: point.x , y: point.y, width: parent!.boxWidth, height: parent!.boxHeight)
     if color.isEqualToColor(NSColor.clearColor()) {
       // Clear color

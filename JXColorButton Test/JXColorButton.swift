@@ -339,7 +339,7 @@ import Cocoa
   
   /// Returns the brightness of a specified color, between 0 and 1.
   /// - Parameter color: The color whose brightness is to be measured.
-  private func colorBrightness(color: NSColor) -> CGFloat {
+  func colorBrightness(color: NSColor) -> CGFloat {
     return color.colorUsingColorSpaceName(NSCalibratedRGBColorSpace)!.brightnessComponent
   }
   

@@ -94,11 +94,12 @@ class JXColorGridView: NSView {
       }
       let title = parent!.defaultColorTitle
       let fontSize = menuTextSize(title)
-      let centerY: CGFloat = (abs(parent!.boxHeight - fontSize.height) / 2.0) + parent!.verticalBoxSpacing - 1.0
-      let y: CGFloat = centerY //max(centerY, 0)
+      let y: CGFloat = (abs(parent!.menuHeight - fontSize.height) / 2.0)
+      let boxY = (abs(parent!.menuHeight - parent!.boxHeight) / 2.0)
+      
       drawMenuString(title, y: y, selected: isSelected)
       // Draw our box of color:
-      drawColorBoxAt(CGPoint(x: parent!.horizontalBoxSpacing, y: parent!.verticalBoxSpacing),
+      drawColorBoxAt(CGPoint(x: parent!.horizontalMargin, y: boxY),
                      color: parent!.defaultColor, selected: isSelected)
     }
     
@@ -108,12 +109,14 @@ class JXColorGridView: NSView {
     let ySpacing = parent!.verticalBoxSpacing
     let boxWidth = parent!.boxWidth
     let boxHeight = parent!.boxHeight
+    let xMargin = parent!.horizontalMargin
+    let yMargin = parent!.verticalMargin
     for row in 0..<parent!.rows {
       for column in 0..<parent!.columns {
         // Show each color
         let color = parent!.colors[row][column]
-        let x = xSpacing + ((boxWidth + xSpacing) * CGFloat(column))
-        let y = menuHeight + ySpacing + ((boxHeight + ySpacing) * CGFloat(row))
+        let x = ((boxWidth + xSpacing) * CGFloat(column)) + xMargin
+        let y = menuHeight + ((boxHeight + ySpacing) * CGFloat(row)) + yMargin
         let isSelected: Bool = (selectedColor != nil && selectedColor! === color) ? true : false
         drawColorBoxAt(CGPoint(x: x, y: y), color: color, selected: isSelected)
       }
@@ -122,22 +125,22 @@ class JXColorGridView: NSView {
     if parent!.usesCustomColor {
       // Render our custom color menu item.
       // If it's selected, render it as selected.
-      let yStart: CGFloat = (self.bounds.height - parent!.menuHeight)
+      let yStart: CGFloat = (self.bounds.height - parent!.menuHeight - ySpacing)
       var isSelected: Bool = (menuSelectionState == .CustomColorPanelDesired) ? true : false
       if isSelected {
         // Render highlight
-        let rect = CGRect(x: 0, y: yStart, width: self.bounds.width, height: parent!.menuHeight)
+        let rect = CGRect(x: 0, y: yStart, width: self.bounds.width, height: parent!.menuHeight + ySpacing)
         parent!.selectedMenuItemColor.setFill()
         NSBezierPath.fillRect(rect)
       }
       let title = parent!.customColorTitle
       let fontSize = menuTextSize(title)
-      let centerY: CGFloat = (abs(parent!.boxHeight - fontSize.height) / 2.0) + parent!.verticalBoxSpacing - 1.0
-      let y: CGFloat = yStart + max(centerY, 0)
+      let y: CGFloat = yStart + (abs(self.bounds.height - yStart) - fontSize.height) / 2.0 - 1.0
+      let boxY = yStart + (abs(self.bounds.height - yStart) - boxHeight) / 2.0
       drawMenuString(title, y: y, selected: isSelected)
       // Draw our box of color:
       if menuSelectionState == .CustomColorSelection { isSelected = true } else { isSelected = false }
-      drawColorBoxAt(CGPoint(x: parent!.horizontalBoxSpacing, y: yStart + parent!.verticalBoxSpacing),
+      drawColorBoxAt(CGPoint(x: parent!.horizontalMargin, y: boxY),
                      color: parent!.customColor, selected: isSelected)
       
     }
@@ -219,8 +222,10 @@ class JXColorGridView: NSView {
         for column in 0..<parent!.columns {
           let color = parent!.colors[row][column]
           let halfBorder: CGFloat = parent!.boxBorderWidth / 2.0
-          let x = parent!.horizontalBoxSpacing + ((parent!.boxWidth + parent!.horizontalBoxSpacing) * CGFloat(column))
-          let y = parent!.menuHeight + parent!.verticalBoxSpacing + ((parent!.boxHeight + parent!.verticalBoxSpacing) * CGFloat(row))
+          
+          let x = ((parent!.boxWidth + parent!.horizontalBoxSpacing) * CGFloat(column)) + parent!.horizontalMargin
+          let y = parent!.menuHeight + ((parent!.boxHeight + parent!.verticalBoxSpacing) * CGFloat(row)) + parent!.verticalMargin
+          
           if mouse!.x >= x - halfBorder && mouse!.x <= x + parent!.boxWidth + halfBorder &&
             mouse!.y >= y - halfBorder && mouse!.y <= y + parent!.boxHeight + halfBorder {
             // We're hovering over a color in the grid
@@ -300,7 +305,7 @@ class JXColorGridView: NSView {
   private func drawMenuString(string: NSString, y: CGFloat, selected: Bool) {
     let str = UnwrappableString(string)
     let fontSize = menuTextSize(str)
-    let x: CGFloat = (2.0 * parent!.horizontalBoxSpacing) + parent!.boxWidth
+    let x: CGFloat = (2.0 * parent!.horizontalBoxSpacing) + parent!.boxWidth + parent!.horizontalMargin
     let width: CGFloat = self.bounds.width - x
     let height: CGFloat = min(parent!.menuHeight - y, fontSize.height)
     let rect: NSRect = NSRect(origin: CGPoint(x: x, y: y), size: CGSize(width: width , height: height))

@@ -77,6 +77,10 @@ import Cocoa
   
   /// The background color of the popover, if any.
   @IBInspectable var popoverBackgroundColor: NSColor? { didSet(value) { refreshPopover() } }
+  /// The left and right margin distance between the grid of colors and the popover window.
+  @IBInspectable var horizontalMargin: CGFloat = 4.0 { didSet(value) { configure() } }
+  /// The top and bottom margin distance between the grid of colors and the popover window.
+  @IBInspectable var verticalMargin: CGFloat = 4.0 { didSet(value) { configure() } }
   /// The horizontal spacing between colors in the grid.
   @IBInspectable var horizontalBoxSpacing: CGFloat = 4.0 { didSet(value) { configure() } }
   /// The vertical spacing between colors in the grid.
@@ -153,7 +157,7 @@ import Cocoa
   /// The height of the menu item at the top and bottom of the popover for the default color
   /// and custom color, respectively. This is calculated based on the vertical box spacing
   /// and the heigh tof the color boxes.
-  var menuHeight: CGFloat { get { return ((2.0 * verticalBoxSpacing) + boxHeight) } }
+  var menuHeight: CGFloat { get { return ((2.0 * verticalMargin) + boxHeight) } }
   
   /// This button has the potential to be the first responder to
   /// handle the changeColor event.
@@ -310,11 +314,11 @@ import Cocoa
   /// display all the colors properly.
   private func popoverRequiredFrameSize() -> NSSize {
     var verticalSpace =
-      (verticalBoxSpacing + (CGFloat(rows) * (boxHeight + verticalBoxSpacing)))
+      ((CGFloat(rows) * (boxHeight + verticalBoxSpacing)) - verticalBoxSpacing + (2 * verticalMargin))
     if usesCustomColor { verticalSpace += menuHeight }
     if usesDefaultColor { verticalSpace += menuHeight }
     let horizontalSpace =
-      (horizontalBoxSpacing + (CGFloat(columns) * (boxWidth + horizontalBoxSpacing)))
+      ((CGFloat(columns) * (boxWidth + horizontalBoxSpacing)) - horizontalBoxSpacing + (2 * horizontalMargin))
     return NSMakeSize(horizontalSpace, verticalSpace)
   }
   

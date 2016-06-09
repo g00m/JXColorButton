@@ -215,12 +215,18 @@ class JXColorGridView: NSView {
     
     if parent!.usesCustomColor && !didSelect {
       // See if the custom color menu item is selected:
-      let yStart = (self.bounds.height - parent!.menuHeight)
+      
+      let yStart: CGFloat = (self.bounds.height - parent!.menuHeight - parent!.verticalBoxSpacing)
+      let boxX = parent!.horizontalMargin
+      let boxY = yStart + (abs(self.bounds.height - yStart) - parent!.boxHeight) / 2.0
+      let boxEndX = boxX + parent!.boxWidth
+      let boxEndY = boxY + parent!.boxHeight
+      
       if mouse!.y >= yStart && mouse!.y <= self.bounds.height {
         // We're in the menu area for the custom color selection. See if it's inside the custom
         // color rectangle, or just on the menu option and handle it appropriately
-        if (mouse!.x >= parent!.horizontalBoxSpacing) && (mouse!.x <= parent!.horizontalBoxSpacing + parent!.boxWidth) &&
-          (mouse!.y >= yStart + parent!.verticalBoxSpacing) && (mouse!.y <= parent!.verticalBoxSpacing + yStart + parent!.boxHeight) {
+        if (mouse!.x >= boxX) && (mouse!.x <= boxEndX) &&
+          (mouse!.y >= boxY) && (mouse!.y <= boxEndY) {
           // We're inside the custom color rectangle itself, so we want to pick the color, not open
           // the color panel
           menuSelectionState = .CustomColorSelection

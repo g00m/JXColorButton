@@ -169,6 +169,7 @@ JXColorButton provides a lot of options to customize, but picks intelligent defa
 
   A CGFloat representing the left and right margin distance between the grid of colors and the popover window.
 * **verticalMargin** 
+
   A CGFloat representing the top and bottom margin distance between the grid of colors and the popover window.
 
 ## License

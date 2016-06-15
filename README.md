@@ -165,6 +165,11 @@ JXColorButton provides a lot of options to customize, but picks intelligent defa
 * **colors** 
 
    A 2D array of NSColors specifying the colors the users can select in the color selection popover. These should not include the default color or custom color, if specified.
+* **horizontalMargin** 
+
+  A CGFloat representing the left and right margin distance between the grid of colors and the popover window.
+* **verticalMargin** 
+  A CGFloat representing the top and bottom margin distance between the grid of colors and the popover window.
 
 ## License
 JXColorButton is provided under the MIT License.

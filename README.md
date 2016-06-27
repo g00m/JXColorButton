@@ -172,6 +172,9 @@ JXColorButton provides a lot of options to customize, but picks intelligent defa
 
   A CGFloat representing the top and bottom margin distance between the grid of colors and the popover window.
 
+## About
+This project was created by [Joseph Essin](https://twitter.com/thestardrop).
+
 ## License
 JXColorButton is provided under the MIT License.
 

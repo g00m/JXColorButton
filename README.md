@@ -1,6 +1,8 @@
 # JXColorButton
 JXColorButton is a custom color well for OS X to provide additional functionality to NSColorWell. It provides a button filled with the selected color. When clicked, it opens a popover menu that displays the provided array of colors, allowing the user to easily select one. This control is similar to the color selector provided in TextEdit in the text view inspector bar. JXColorButton also plays nicely with the OS X color picker for custom colors.
 
+Looking for a textured-rounded NSComboBox? Check out [JXTexturedComboBox](https://github.com/josephessin/JXTexturedComboBox)
+
 <img src="https://raw.githubusercontent.com/josephessin/JXColorButton/master/demo.gif" align="right" width="350" />
 
 ## Getting Setup

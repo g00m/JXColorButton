@@ -1,6 +1,6 @@
 //
 //  ColorGridView.swift
-//  JEColorButton
+//  JXColorButton
 //
 //  Created by Joseph Essin on 4/15/16.
 //

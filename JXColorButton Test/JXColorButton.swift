@@ -1,6 +1,6 @@
 //
-//  JEColorButton.swift
-//  JEColorButton
+//  JXColorButton.swift
+//  JXColorButton
 //
 //  Created by Joseph Essin on 4/15/16.
 //
@@ -10,7 +10,7 @@ import Cocoa
 
 /// An NSButton subclass that allows the user to pick a color from a list
 /// of colors in a popover. This button is highly configurable.
-@objc @IBDesignable public class JXColorButton: NSView, JXColorGridViewDelegate {
+@objc @IBDesignable public class JXColorButton: NSView, JXColorGridViewDelegate, NSAccessibilityButton {
   
   // MARK: Static Properties
   
@@ -29,6 +29,9 @@ import Cocoa
   static var lastColorButton: JXColorButton?
   
   // MARK: Properties
+  
+  /// The button's accessibility label.
+  @IBOutlet var label: String? = "Color Picker"
   
   /// The controller that handles this controls' actions (such as click event).
   /// You can hook this up in interface builder if you like.
@@ -375,11 +378,22 @@ import Cocoa
   
   // MARK: Event Management
   
-  override public func mouseUp(theEvent: NSEvent) {
-    super.mouseUp(theEvent)
+  override public func mouseUp(theEvent: NSEvent?) {
+    if theEvent != nil { super.mouseUp(theEvent!) }
     JXColorButton.lastColorButton = self
     colorPanel.setTarget(self)
     colorPanel.setAction(#selector(self.colorFromPanel(_:)))
     showColorPopover()
+  }
+  
+  // MARK: Accessibility Support
+  
+  override public func accessibilityLabel() -> String? {
+    return label
+  }
+  
+  override public func accessibilityPerformPress() -> Bool {
+    self.mouseUp(nil)
+    return true // Always handled, for now.
   }
 }

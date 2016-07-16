@@ -1,6 +1,6 @@
 //
 //  NSImageView Tinted Extension.swift
-//  Wink
+//  JXColorButton
 //
 //  Created by Joseph Essin on 4/1/16.
 //

@@ -389,7 +389,7 @@ import Cocoa
   // MARK: Accessibility Support
   
   override public func accessibilityLabel() -> String? {
-    return label
+    return self.toolTip
   }
   
   override public func accessibilityPerformPress() -> Bool {

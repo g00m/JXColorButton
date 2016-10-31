@@ -9,7 +9,7 @@ import Cocoa
 extension NSColor {
   
   /// Compares a color with itself and returns true if they are equal.
-  func isEqualToColor(otherColor : NSColor) -> Bool {
+  func isEqualToColor(_ otherColor : NSColor) -> Bool {
     
     // Credit of:
     // http://stackoverflow.com/a/30646646/4615448
@@ -21,12 +21,12 @@ extension NSColor {
     //}
     
     let colorSpaceRGB = CGColorSpaceCreateDeviceRGB()
-    let convertColorToRGBSpace : ((color : NSColor) -> NSColor?) = { (color) -> NSColor? in
-      if CGColorSpaceGetModel(CGColorGetColorSpace(color.CGColor)) == CGColorSpaceModel.Monochrome {
-        let oldComponents = CGColorGetComponents(color.CGColor)
-        let components : [CGFloat] = [ oldComponents[0], oldComponents[0], oldComponents[0], oldComponents[1] ]
-        let colorRef = CGColorCreate(colorSpaceRGB, components)
-        let colorOut = NSColor(CGColor: colorRef!)
+    let convertColorToRGBSpace : ((_ color : NSColor) -> NSColor?) = { (color) -> NSColor? in
+      if color.cgColor.colorSpace?.model == CGColorSpaceModel.monochrome {
+        let oldComponents = color.cgColor.components
+        let components : [CGFloat] = [ oldComponents![0], oldComponents![0], oldComponents![0], oldComponents![1] ]
+        let colorRef = CGColor(colorSpace: colorSpaceRGB, components: components)
+        let colorOut = NSColor(cgColor: colorRef!)
         return colorOut
       }
       else {
@@ -34,10 +34,10 @@ extension NSColor {
       }
     }
     
-    let selfColor = convertColorToRGBSpace(color: self)
-    let otherColor = convertColorToRGBSpace(color: otherColor)
+    let selfColor = convertColorToRGBSpace(self)
+    let otherColor = convertColorToRGBSpace(otherColor)
     
-    if let selfColor = selfColor, otherColor = otherColor {
+    if let selfColor = selfColor, let otherColor = otherColor {
       return selfColor.isEqual(otherColor)
     }
     else {

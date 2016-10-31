@@ -18,19 +18,19 @@ class WindowController: NSWindowController, JXColorButtonDelegate {
         
         // Row x Column array representing the colors the user can select from our color popover in the JXColorButton.
         colorPicker2.colors = [
-            [ NSColor.whiteColor(), NSColor.blackColor(), NSColor.redColor(), NSColor.darkGrayColor() ],
-            [ NSColor.greenColor(), NSColor.purpleColor(), NSColor.orangeColor(), NSColor.lightGrayColor() ]
+            [ NSColor.white, NSColor.black, NSColor.red, NSColor.darkGray ],
+            [ NSColor.green, NSColor.purple, NSColor.orange, NSColor.lightGray ]
         ]
         
         colorPicker1.boxWidth = 30
         colorPicker1.borderRadius = 1
-        colorPicker1.boxBorderColor = NSColor.blackColor()
-        colorPicker1.selectedBoxColor = NSColor.whiteColor()
+        colorPicker1.boxBorderColor = NSColor.black
+        colorPicker1.selectedBoxColor = NSColor.white
         colorPicker1.darkMode = true
-        colorPicker1.selectedMenuItemColor = NSColor.whiteColor()
-        colorPicker1.selectedMenuItemTextColor = NSColor.blackColor()
+        colorPicker1.selectedMenuItemColor = NSColor.white
+        colorPicker1.selectedMenuItemTextColor = NSColor.black
         
-        colorPicker2.color = NSColor.redColor()
+        colorPicker2.color = NSColor.red
         colorPicker2.image = NSImage(named: NSImageNameColorPanel)
         // Set this to true if you're using a template image.
         //colorPicker2.imageIsTemplate = true
@@ -41,11 +41,11 @@ class WindowController: NSWindowController, JXColorButtonDelegate {
     }
     
     /// Sent from our JXColorButtons
-    func colorSelected(sender: JXColorButton, color: NSColor) {
+    func colorSelected(_ sender: JXColorButton, color: NSColor) {
         if sender === colorPicker1 {
-            Swift.print("Color from picker 1: " + String(color))
+            Swift.print("Color from picker 1: " + String(describing: color))
         } else if sender === colorPicker2 {
-            Swift.print("Color from picker 2: " + String(color))
+            Swift.print("Color from picker 2: " + String(describing: color))
         }
     }
 }

@@ -8,5 +8,5 @@
 import Cocoa
 
 @objc protocol JXColorButtonDelegate {
-  func colorSelected(sender: JXColorButton, color: NSColor)
+  func colorSelected(_ sender: JXColorButton, color: NSColor)
 }

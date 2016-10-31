@@ -15,13 +15,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // and no window is ever able to be shown...
     let myWindowController = WindowController(windowNibName: "Window")
     
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         
         myWindowController.showWindow(self)
     }
     
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
     

@@ -10,18 +10,18 @@ import Cocoa
 
 /// An NSButton subclass that allows the user to pick a color from a list
 /// of colors in a popover. This button is highly configurable.
-@objc @IBDesignable public class JXColorButton: NSView, JXColorGridViewDelegate, NSAccessibilityButton {
+@objc @IBDesignable open class JXColorButton: NSView, JXColorGridViewDelegate, NSAccessibilityButton, CALayerDelegate {
   
   // MARK: Static Properties
   
   /// The default background color of the button.
-  static var defaultBackgroundColor: NSColor = NSColor.whiteColor()
+  static var defaultBackgroundColor: NSColor = NSColor.white
   
   /// A list of default colors to supply to the color button.
   static var defaultColorList: [[NSColor]] = [
-    [NSColor.whiteColor(),  NSColor.grayColor(),    NSColor.darkGrayColor(), NSColor.blackColor(), ],
-    [NSColor.redColor(),    NSColor.magentaColor(), NSColor.purpleColor(),   NSColor.orangeColor() ],
-    [NSColor.yellowColor(), NSColor.blueColor(),    NSColor.cyanColor(),     NSColor.greenColor(), ]
+    [NSColor.white,  NSColor.gray,    NSColor.darkGray, NSColor.black, ],
+    [NSColor.red,    NSColor.magenta, NSColor.purple,   NSColor.orange ],
+    [NSColor.yellow, NSColor.blue,    NSColor.cyan,     NSColor.green, ]
   ]
   
   /// The most recently clicked-on JXColorButton.
@@ -40,7 +40,7 @@ import Cocoa
   /// The border radius of the button.
   @IBInspectable var borderRadius: CGFloat = 4.0 { didSet(value) { layer?.cornerRadius = value } }
   /// The border color of the button.
-  @IBInspectable var borderColor: CGColor = NSColor.lightGrayColor().CGColor { didSet(value) { layer?.borderColor = value } }
+  @IBInspectable var borderColor: CGColor = NSColor.lightGray.cgColor { didSet(value) { layer?.borderColor = value } }
   /// The border width of the button.
   @IBInspectable var borderWidth: CGFloat = 0.5 { didSet(value) { layer?.borderWidth = value } }
   
@@ -58,15 +58,15 @@ import Cocoa
   @IBInspectable var customColorTitle: NSString = "Custom Color" { didSet(value) { refreshPopover() } }
   
   /// The default color the user is allowed to choose.
-  @IBInspectable var defaultColor: NSColor = NSColor.blackColor() { didSet(value) { refreshPopover() } }
+  @IBInspectable var defaultColor: NSColor = NSColor.black { didSet(value) { refreshPopover() } }
   /// The custom color that the user picks.
-  @IBInspectable var customColor: NSColor = NSColor.magentaColor() { didSet(value) { refreshPopover() } }
+  @IBInspectable var customColor: NSColor = NSColor.magenta { didSet(value) { refreshPopover() } }
   /// The background color of the button.
   /// If you need to set this back to the default, use
   /// colorButton.backgroundColor b= JEColorButton.defaultBackgroundColor
   @IBInspectable var color: NSColor = JXColorButton.defaultBackgroundColor {
     willSet(value) {
-      layer?.backgroundColor = value.CGColor
+      layer?.backgroundColor = value.cgColor
       if !colorReferenced(value) {
         customColor = colorPanel.color
       }
@@ -93,19 +93,19 @@ import Cocoa
   /// The height of the color boxes, in points:
   @IBInspectable var boxHeight: CGFloat = 20.0 { didSet(value) { configure() } }
   /// The color of the currently selected color box (defaults to the user's selection color).
-  @IBInspectable var selectedBoxColor: NSColor = NSColor.selectedMenuItemColor() { didSet(value) { refreshPopover() } }
+  @IBInspectable var selectedBoxColor: NSColor = NSColor.selectedMenuItemColor { didSet(value) { refreshPopover() } }
   /// The border/stroke width of the color boxes
   @IBInspectable var boxBorderWidth: CGFloat = 1.0 { didSet(value) { refreshPopover() } }
   /// The border/stroke width of the of the selected color box:
   @IBInspectable var selectedBoxBorderWidth: CGFloat = 4.0 { didSet(value) { refreshPopover() } }
   /// The border color of the color boxes
-  @IBInspectable var boxBorderColor: NSColor = NSColor.lightGrayColor() { didSet(value) { refreshPopover() } }
+  @IBInspectable var boxBorderColor: NSColor = NSColor.lightGray { didSet(value) { refreshPopover() } }
   /// The selection color of menu items
-  @IBInspectable var selectedMenuItemColor: NSColor = NSColor.selectedMenuItemColor() { didSet(value) { refreshPopover() } }
+  @IBInspectable var selectedMenuItemColor: NSColor = NSColor.selectedMenuItemColor { didSet(value) { refreshPopover() } }
   /// The color of selected text in a menu item
-  @IBInspectable var selectedMenuItemTextColor: NSColor = NSColor.selectedMenuItemTextColor() { didSet(value) { refreshPopover() } }
+  @IBInspectable var selectedMenuItemTextColor: NSColor = NSColor.selectedMenuItemTextColor { didSet(value) { refreshPopover() } }
   // The color of normal text in the menu items:
-  @IBInspectable var textColor: NSColor = NSColor.textColor() { didSet(value) { refreshPopover() } }
+  @IBInspectable var textColor: NSColor = NSColor.textColor { didSet(value) { refreshPopover() } }
   /// Whether or not the popover is displayed in dark mode.
   @IBInspectable var darkMode: Bool = false { didSet(value) { configure() } }
   
@@ -123,9 +123,9 @@ import Cocoa
   /// Whether or not the image is rendered as a template color specified by imageColor.
   @IBInspectable var imageIsTemplate: Bool = false { didSet(value) { updateImage() } }
   /// The color of the image when it is on a dark background
-  @IBInspectable var imageLightColor: NSColor = NSColor.whiteColor() { didSet(value) { updateImage() } }
+  @IBInspectable var imageLightColor: NSColor = NSColor.white { didSet(value) { updateImage() } }
   /// The color of hte image when it is on a light or transparent background
-  @IBInspectable var imageNormalColor: NSColor = NSColor.controlDarkShadowColor() { didSet(value) { updateImage() } }
+  @IBInspectable var imageNormalColor: NSColor = NSColor.controlDarkShadowColor { didSet(value) { updateImage() } }
   /// Vertical padding of the image in points
   @IBInspectable var imageVerticalPadding: CGFloat = 2.0 { didSet(value) { layer?.setNeedsDisplay() } }
   /// Horizontal padding of the image in points
@@ -138,7 +138,7 @@ import Cocoa
   var colors: [[NSColor]] = defaultColorList { didSet { configure() } }
   
   /// The most recent form of color selection.
-  var lastSelectionType: JXColorGridViewSelectionType = .ColorGridSelection
+  var lastSelectionType: JXColorGridViewSelectionType = .colorGridSelection
   
   /// The number of rows of colors.
   var rows: Int { get { return colors.count  } }
@@ -146,16 +146,16 @@ import Cocoa
   var columns: Int { get { return colors[0].count } }
   
   /// The popover that the button shows.
-  private var popover: NSPopover = NSPopover()
+  fileprivate var popover: NSPopover = NSPopover()
   
   /// The popover view controller
-  private var popoverViewController: NSViewController = NSViewController()
+  fileprivate var popoverViewController: NSViewController = NSViewController()
   
   /// A handle to the color picker.
-  private let colorPanel = NSColorPanel.sharedColorPanel()
+  fileprivate let colorPanel = NSColorPanel.shared()
   
   /// The image to render--use image property for public access.
-  private var icon: NSImage?
+  fileprivate var icon: NSImage?
   
   /// The height of the menu item at the top and bottom of the popover for the default color
   /// and custom color, respectively. This is calculated based on the vertical box spacing
@@ -164,7 +164,7 @@ import Cocoa
   
   /// This button has the potential to be the first responder to
   /// handle the changeColor event.
-  override public var acceptsFirstResponder: Bool {
+  override open var acceptsFirstResponder: Bool {
     get { return true }
   }
   
@@ -185,8 +185,8 @@ import Cocoa
   
   // MARK: Internal
   
-  override public func drawRect(dirtyRect: NSRect) {
-    super.drawRect(dirtyRect)
+  override open func draw(_ dirtyRect: NSRect) {
+    super.draw(dirtyRect)
     
     // If there's an image/icon specified, let's draw it with respect to the padding from the border
     // and its aspect ratio using an image sublayer.
@@ -205,8 +205,8 @@ import Cocoa
       let newWidth = rawWidth * imgScale
       let newHeight = rawHeight * imgScale
       
-      sublayer.bounds = CGRectMake(0, 0, newWidth, newHeight)
-      sublayer.contents = pic.layerContentsForContentsScale(deviceScale)
+      sublayer.bounds = CGRect(x: 0, y: 0, width: newWidth, height: newHeight)
+      sublayer.contents = pic.layerContents(forContentsScale: deviceScale)
       sublayer.contentsGravity = kCAGravityResizeAspectFill
       sublayer.position = NSMakePoint(self.bounds.size.width / 2, self.bounds.size.height / 2)
       layer!.addSublayer(sublayer)
@@ -219,36 +219,36 @@ import Cocoa
   func showColorPanel() {
     colorPanel.showsAlpha = usesAlphaChannel
     configureColorPanel()
-    colorPanel.continuous = true
-    NSApplication.sharedApplication().orderFrontColorPanel(self)
+    colorPanel.isContinuous = true
+    NSApplication.shared().orderFrontColorPanel(self)
   }
   
   /// Configures the color panel to respond to this color button
-  private func configureColorPanel() {
+  fileprivate func configureColorPanel() {
     colorPanel.setTarget(self)
     colorPanel.setAction(#selector(self.colorFromPanel(_:)))
   }
   
   /// Call this function when the button is clicked.
   func showColorPopover() {
-    if popover.shown { return }
+    if popover.isShown { return }
     // Set our popover to be the right size:
     popover.contentSize = popoverRequiredFrameSize()
-    popover.behavior = .Transient
+    popover.behavior = .transient
     popover.animates = true
     // Show the popover:
     refreshPopover()
-    popover.showRelativeToRect(self.bounds, ofView: self, preferredEdge: .MinY)
+    popover.show(relativeTo: self.bounds, of: self, preferredEdge: .minY)
   }
   
   // MARK: JXColorGridViewDelegate
   
-  func colorWasSelected(sender: JXColorGridView, color: NSColor?, selectionType: JXColorGridViewSelectionType) {
+  func colorWasSelected(_ sender: JXColorGridView, color: NSColor?, selectionType: JXColorGridViewSelectionType) {
     popover.close()
     var color = color
     lastSelectionType = selectionType
-    if selectionType == .CustomColorPanelDesired {
-      if !colorPanel.visible {
+    if selectionType == .customColorPanelDesired {
+      if !colorPanel.isVisible {
         showColorPanel()
         color = nil
       }
@@ -267,20 +267,20 @@ import Cocoa
   // MARK: Private Methods
   
   /// Tells the popover to redraw.
-  private func refreshPopover() {
-    popoverViewController.view.needsToDrawRect(popoverViewController.view.bounds)
+  fileprivate func refreshPopover() {
+    popoverViewController.view.needsToDraw(popoverViewController.view.bounds)
     popoverViewController.view.display()
   }
   
   /// When the list of colors change, we have to create a new view with the right size
   /// to accomodate for this change.
-  private func resetPopoverView() {
+  fileprivate func resetPopoverView() {
     popover.contentViewController!.view =
       JXColorGridView(frame: CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: popoverRequiredFrameSize()),
                       belongsTo: self)
   }
   
-  private func setup() {
+  fileprivate func setup() {
     // Configure the button's layer
     wantsLayer = true
     layer = CALayer()
@@ -290,9 +290,9 @@ import Cocoa
     layer!.borderColor = borderColor
     layer!.borderWidth = borderWidth
     // Configure the background:
-    layer!.backgroundColor = color.CGColor
+    layer!.backgroundColor = color.cgColor
     layer!.shadowOffset = CGSize(width: 0, height: -0.5)
-    layer!.shadowColor = NSColor.blackColor().CGColor
+    layer!.shadowColor = NSColor.black.cgColor
     layer!.shadowRadius = 0
     layer!.shadowOpacity = 0.2
     configureColorPanel()
@@ -304,7 +304,7 @@ import Cocoa
   
   
   /// Configures the button--only needs to be called once.
-  private func configure() {
+  fileprivate func configure() {
     if darkMode {
       popover.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
     } else {
@@ -315,7 +315,7 @@ import Cocoa
   
   /// Calculates the size a popover will need to be to properly
   /// display all the colors properly.
-  private func popoverRequiredFrameSize() -> NSSize {
+  fileprivate func popoverRequiredFrameSize() -> NSSize {
     var verticalSpace =
       ((CGFloat(rows) * (boxHeight + verticalBoxSpacing)) - verticalBoxSpacing + (2 * verticalMargin))
     if usesCustomColor { verticalSpace += menuHeight }
@@ -326,7 +326,7 @@ import Cocoa
   }
   
   /// Returns true if the specified color is listed in the color list.
-  private func colorReferenced(color: NSColor) -> Bool {
+  fileprivate func colorReferenced(_ color: NSColor) -> Bool {
     if color.isEqualToColor(defaultColor) || color.isEqualToColor(customColor) {
       return true
     }
@@ -342,12 +342,12 @@ import Cocoa
   
   /// Returns the brightness of a specified color, between 0 and 1.
   /// - Parameter color: The color whose brightness is to be measured.
-  func colorBrightness(color: NSColor) -> CGFloat {
-    return color.colorUsingColorSpaceName(NSCalibratedRGBColorSpace)!.brightnessComponent
+  func colorBrightness(_ color: NSColor) -> CGFloat {
+    return color.usingColorSpaceName(NSCalibratedRGBColorSpace)!.brightnessComponent
   }
   
   /// Updates the template image
-  private func updateImage() {
+  fileprivate func updateImage() {
     if imageIsTemplate && image != nil {
       // Check the color of our background and make sure the
       let brightness = colorBrightness(color)
@@ -363,8 +363,8 @@ import Cocoa
   
   // MARK: Color Panel
   
-  @objc private func colorFromPanel(sender: AnyObject?) {
-    if !colorPanel.visible { return }
+  @objc fileprivate func colorFromPanel(_ sender: AnyObject?) {
+    if !colorPanel.isVisible { return }
     // Look at the last JXColorButton to have focus and alter it accordingly.
     if let lastColorButton = JXColorButton.lastColorButton {
       lastColorButton.color = colorPanel.color
@@ -378,8 +378,8 @@ import Cocoa
   
   // MARK: Event Management
   
-  override public func mouseUp(theEvent: NSEvent?) {
-    if theEvent != nil { super.mouseUp(theEvent!) }
+  override open func mouseUp(with theEvent: NSEvent?) {
+    if theEvent != nil { super.mouseUp(with: theEvent!) }
     JXColorButton.lastColorButton = self
     colorPanel.setTarget(self)
     colorPanel.setAction(#selector(self.colorFromPanel(_:)))
@@ -388,12 +388,12 @@ import Cocoa
   
   // MARK: Accessibility Support
   
-  override public func accessibilityLabel() -> String? {
+  override open func accessibilityLabel() -> String? {
     return self.toolTip
   }
   
-  override public func accessibilityPerformPress() -> Bool {
-    self.mouseUp(nil)
+  override open func accessibilityPerformPress() -> Bool {
+    self.mouseUp(with: nil)
     return true // Always handled, for now.
   }
 }
